@@ -2,6 +2,8 @@
 
 set -e
 
+ORIGINAL_USER=$(whoami)
+ORIGINAL_HOME=$HOME
 [[ $EUID -eq 0 ]] || exec sudo "$0" "$@"
 
 export PATH=$PATH:/usr/local/go/bin
@@ -24,6 +26,6 @@ if ! command -v go >/dev/null 2>&1; then
 	rm -f "$GO_ARCHIVE"
 fi
 
-if ! grep -q '/usr/local/go/bin' ~/.profile; then
-    echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.profile
+if ! grep -q "/usr/local/go/bin" "$ORIGINAL_HOME/.profile"; then
+    echo 'export PATH=$PATH:/usr/local/go/bin' >> "$ORIGINAL_HOME/.profile"
 fi

@@ -2,6 +2,8 @@
 
 set -e
 
+ORIGINAL_USER=$(whoami)
+ORIGINAL_HOME=$HOME
 [[ $EUID -eq 0 ]] || exec sudo "$0" "$@"
 
 if ! command -v yazi >/dev/null 2>&1; then
@@ -12,10 +14,10 @@ if ! command -v yazi >/dev/null 2>&1; then
 	rm -rf yazi-temp yazi.zip
 fi
 
-mkdir -p ~/.config/yazi
+mkdir -p $ORIGINAL_HOME/.config/yazi
 
-if [ ! -f "$HOME/.config/yazi/yazi.toml" ]; then
-	cat > ~/.config/yazi/yazi.toml <<EOF
+if [ ! -f "$ORIGINAL_HOME/.config/yazi/yazi.toml" ]; then
+	cat > $ORIGINAL_HOME/.config/yazi/yazi.toml <<EOF
 [mgr]
 show_hidden = true
 ratio = [1, 2, 4]

@@ -2,14 +2,16 @@
 
 set -e
 
+ORIGINAL_USER=$(whoami)
+ORIGINAL_HOME=$HOME
 [[ $EUID -eq 0 ]] || exec sudo "$0" "$@"
 
 if ! command -v vim >/dev/null 2>&1; then
 	apt install -y vim
 fi
 
-if [ ! -f "$HOME/.vimrc" ]; then
-	cat > ~/.vimrc <<EOF
+if [ ! -f "$ORIGINAL_HOME/.vimrc" ]; then
+	cat > $ORIGINAL_HOME/.vimrc <<EOF
 filetype plugin indent on
 syntax on
 set number

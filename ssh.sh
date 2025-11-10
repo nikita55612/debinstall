@@ -2,6 +2,8 @@
 
 set -e
 
+ORIGINAL_USER=$(whoami)
+ORIGINAL_HOME=$HOME
 [[ $EUID -eq 0 ]] || exec sudo "$0" "$@"
 
 inputv() {
@@ -24,16 +26,14 @@ inputport() {
     echo "$port"
 }
 
-mkdir -p ~/.ssh
-chmod 700 ~/.ssh
+mkdir -p $ORIGINAL_HOME/.ssh
+chmod 700 $ORIGINAL_HOME/.ssh
 
-username=$(whoami)
+pubsshkey=$(inputv "Введите публичный SSH-ключ для пользователя $ORIGINAL_USER: ")
 
-pubsshkey=$(inputv "Введите публичный SSH-ключ для пользователя $username: ")
+echo "$pubsshkey" > $ORIGINAL_HOME/.ssh/authorized_keys
 
-echo "$pubsshkey" > ~/.ssh/authorized_keys
-
-chmod 600 ~/.ssh/authorized_keys
+chmod 600 $ORIGINAL_HOME/.ssh/authorized_keys
 
 sshport=$(inputport "Введите SSH-порт (от 1024 до 65535): ")
 
