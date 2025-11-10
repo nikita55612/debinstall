@@ -64,8 +64,8 @@ fi
 
 mkdir -p /etc/3proxy /var/log/3proxy
 
-3proxylinksfile=/etc/3proxy/links
-touch "$3proxylinksfile"
+proxylinksfile=/etc/3proxy/links
+touch "$proxylinksfile"
 
 n=0
 while true; do
@@ -74,7 +74,7 @@ while true; do
 
     port=$(inputport "Введите порт (1024-65535): ")
 
-    local userscount=""
+    userscount=""
     while ! [[ "$userscount" =~ ^[0-9]+$ ]] || [ "$userscount" -le 0 ]; do
         userscount=$(inputv "Введите количество пользователей для добавления: ")
     done
@@ -84,7 +84,7 @@ while true; do
         username="${hostname}user$n"
         password=$(openssl rand -base64 12 | tr -d '/+' | cut -c1-12)
         echo "users $username:CL:$password" >> /etc/3proxy/3proxy.cfg
-        echo "http://$username:$password@$serverip:$port" >> "$3proxylinksfile"
+        echo "http://$username:$password@$serverip:$port" >> "$proxylinksfile"
     done
 
     cat >> /etc/3proxy/3proxy.cfg <<EOF
@@ -100,7 +100,7 @@ while true; do
 
     port=$(inputport "Введите порт (1024-65535): ")
 
-    local userscount=""
+    userscount=""
     while ! [[ "$userscount" =~ ^[0-9]+$ ]] || [ "$userscount" -le 0 ]; do
         userscount=$(inputv "Введите количество пользователей для добавления: ")
     done
@@ -110,7 +110,7 @@ while true; do
         username="${hostname}user$n"
         password=$(openssl rand -base64 12 | tr -d '/+' | cut -c1-12)
         echo "users $username:CL:$password" >> /etc/3proxy/3proxy.cfg
-		echo "socks5://$username:$password@$serverip:$port" >> "$3proxylinksfile"
+		echo "socks5://$username:$password@$serverip:$port" >> "$proxylinksfile"
     done
 
     cat >> /etc/3proxy/3proxy.cfg <<EOF
