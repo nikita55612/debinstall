@@ -16,9 +16,19 @@ chmod +x ./*.sh
 
 source "./newuser.sh"
 
-abcrepodir=$(dirname "$(realpath "$0")")
+newuserhome="/home/$NEW_USERNAME"
 
-su - "$NEW_USERNAME" -c "bash '$abcrepodir/ssh.sh'"
-su - "$NEW_USERNAME" -c "bash '$abcrepodir/vim.sh'"
-su - "$NEW_USERNAME" -c "bash '$abcrepodir/yazi.sh'"
-su - "$NEW_USERNAME" -c "bash '$abcrepodir/golang.sh'"
+mkdir -p "$newuserhome"/tmpscripts
+cp "$repodir"/*.sh "$newuserhome"/tmpscripts/
+chown -R "$NEW_USERNAME:$NEW_USERNAME" "$newuserhome"/tmpscripts
+chmod +x "$newuserhome"/tmpscripts/*.sh
+
+su - "$NEW_USERNAME" -c "
+    cd '$newuserhome/tmpscripts'
+    ./ssh.sh
+    ./vim.sh
+    ./yazi.sh
+    ./golang.sh
+"
+
+rm -rf "$newuserhome"/tmpscripts
