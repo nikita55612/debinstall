@@ -2,9 +2,9 @@
 
 set -e
 
-ORIGINAL_USER=$(whoami)
-ORIGINAL_HOME=$HOME
-[[ $EUID -eq 0 ]] || exec sudo "$0" "$@"
+[[ $EUID -eq 0 ]] || exec sudo "$0" "$(whoami)" "$HOME" "$@"
+ORIGINAL_USER="${1:-$(whoami)}"
+ORIGINAL_HOME="${2:-$HOME}"
 
 if ! command -v yazi >/dev/null 2>&1; then
 	wget -O yazi.zip https://github.com/sxyazi/yazi/releases/latest/download/yazi-x86_64-unknown-linux-gnu.zip

@@ -2,9 +2,9 @@
 
 set -e
 
-ORIGINAL_USER=$(whoami)
-ORIGINAL_HOME=$HOME
-[[ $EUID -eq 0 ]] || exec sudo "$0" "$@"
+[[ $EUID -eq 0 ]] || exec sudo "$0" "$(whoami)" "$HOME" "$@"
+ORIGINAL_USER="${1:-$(whoami)}"
+ORIGINAL_HOME="${2:-$HOME}"
 
 inputv() {
     local v=""
