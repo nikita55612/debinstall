@@ -19,7 +19,7 @@ source "./newuser.sh"
 newuserhome="/home/$NEW_USERNAME"
 
 mkdir -p "$newuserhome"/tmpscripts
-cp "$repodir"/*.sh "$newuserhome"/tmpscripts/
+cp ./*.sh "$newuserhome"/tmpscripts/
 chown -R "$NEW_USERNAME:$NEW_USERNAME" "$newuserhome"/tmpscripts
 chmod +x "$newuserhome"/tmpscripts/*.sh
 
