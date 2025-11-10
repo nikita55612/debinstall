@@ -4,7 +4,7 @@ set -e
 
 [[ $EUID -eq 0 ]] || exec sudo "$0" "$@"
 
-if ! systemctl list-unit-files --type=service | grep -q 3proxy.service; then
+if ! systemctl list-unit-files --type=service | grep -q proxyhub.service; then
     git clone --depth 1 https://github.com/nikita55612/ProxyHub
 	cd ProxyHub
 	chmod +x install.sh

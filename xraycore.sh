@@ -104,7 +104,7 @@ new_vless_reality_inbound() {
             '.settings.clients += [{"id": $uuid, "email": $username, "flow": "xtls-rprx-vision"}] |
              .streamSettings.realitySettings.shortIds += [$shortid]')
 
-        local link="vless://${uuid}@${serverip}:${port}?encryption=none&flow=xtls-rprx-vision&security=reality&sni=${desthost}&fp=chrome&pbk=${publickey}&sid=${shortid}&type=tcp&headerType=none#${username}"
+        local link="vless://${uuid}@${serverip}:${port}?encryption=none&flow=xtls-rprx-vision&security=reality&sni=${desthost}&fp=chrome&pbk=${publickey}&sid=${shortid}&type=tcp#${username}"
 
 		echo "$link" >> "$xraylinksfile"
     done
