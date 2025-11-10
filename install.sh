@@ -39,4 +39,4 @@ chmod +x "$newuserhome"/runscripts.sh
 chown "$NEW_USERNAME:$NEW_USERNAME" "$newuserhome"/runscripts.sh
 
 echo "Переключитесь на пользователя $NEW_USERNAME..."
-echo "Запустите: ./run_scripts.sh"
+echo "Запустите: ./runscripts.sh"
