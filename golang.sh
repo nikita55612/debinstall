@@ -13,7 +13,7 @@ if ! command -v go >/dev/null 2>&1; then
 	# GO_ARCHIVE="$GO_VERSION".linux-amd64.tar.gz
 
 	GO_STABLE_VERSION=$(curl -s https://go.dev/dl/?mode=json | grep -m 1 '"version":' | grep -oP '"version": "\K[^"]+')
-	GO_ARCHIVE=$GO_STABLE_VERSION.linux-amd64.tar.gz
+	GO_ARCHIVE="$GO_STABLE_VERSION.linux-amd64.tar.gz"
 
 	wget "https://go.dev/dl/${GO_ARCHIVE}" -O "$GO_ARCHIVE"
 

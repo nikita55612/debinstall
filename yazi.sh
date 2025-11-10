@@ -14,10 +14,10 @@ if ! command -v yazi >/dev/null 2>&1; then
 	rm -rf yazi-temp yazi.zip
 fi
 
-mkdir -p $ORIGINAL_HOME/.config/yazi
+mkdir -p "$ORIGINAL_HOME/.config/yazi"
 
 if [ ! -f "$ORIGINAL_HOME/.config/yazi/yazi.toml" ]; then
-	cat > $ORIGINAL_HOME/.config/yazi/yazi.toml <<EOF
+	cat > "$ORIGINAL_HOME/.config/yazi/yazi.toml" <<EOF
 [mgr]
 show_hidden = true
 ratio = [1, 2, 4]
