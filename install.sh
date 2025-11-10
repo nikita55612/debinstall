@@ -23,12 +23,20 @@ cp ./*.sh "$newuserhome"/tmpscripts/
 chown -R "$NEW_USERNAME:$NEW_USERNAME" "$newuserhome"/tmpscripts
 chmod +x "$newuserhome"/tmpscripts/*.sh
 
-su - "$NEW_USERNAME" -c "
-    cd '$newuserhome/tmpscripts'
-    ./ssh.sh
-    ./vim.sh
-    ./yazi.sh
-    ./golang.sh
-"
+cat > "$newuserhome"/runscripts.sh <<EOF
+#!/bin/bash
+cd /home/$NEW_USERNAME/tmpscripts
+./ssh.sh
+./vim.sh
+./yazi.sh
+./golang.sh
+rm -f /home/$NEW_USERNAME/runscripts.sh
+cd ~
+rm -rf tmpscripts
+EOF
 
-rm -rf "$newuserhome"/tmpscripts
+chmod +x "$newuserhome"/runscripts.sh
+chown "$NEW_USERNAME:$NEW_USERNAME" "$newuserhome"/runscripts.sh
+
+echo "Переключитесь на пользователя $NEW_USERNAME..."
+echo "Запустите: ./run_scripts.sh"

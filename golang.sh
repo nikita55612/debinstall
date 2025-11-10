@@ -4,6 +4,8 @@ set -e
 
 [[ $EUID -eq 0 ]] || exec sudo "$0" "$@"
 
+export PATH=$PATH:/usr/local/go/bin
+
 if ! command -v go >/dev/null 2>&1; then
 	# GO_VERSION=go1.25.3
 	# GO_ARCHIVE="$GO_VERSION".linux-amd64.tar.gz
@@ -25,5 +27,3 @@ fi
 if ! grep -q '/usr/local/go/bin' ~/.profile; then
     echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.profile
 fi
-
-export PATH=$PATH:/usr/local/go/bin
