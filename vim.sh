@@ -10,6 +10,8 @@ if ! command -v vim >/dev/null 2>&1; then
 	apt install -y vim
 fi
 
+mkdir -p "$ORIG_HOME/.vim/undodir"
+
 if [ ! -f "$ORIG_HOME/.vimrc" ]; then
 	cat > "$ORIG_HOME/.vimrc" <<'EOF'
 set number
