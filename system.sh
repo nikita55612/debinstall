@@ -72,4 +72,6 @@ if [[ "$configureufw" == "y" || "$configureufw" == "Y" ]]; then
 
     ufw allow $startport:$endport/tcp
     ufw allow $startport:$endport/udp
+
+    ufw enable
 fi

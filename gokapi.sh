@@ -18,16 +18,16 @@ inputport() {
 
 unzipf="gokapi-linux_amd64"
 
-mkdir -p /opt/gokapi
-wget -O gokapi.zip https://github.com/Forceu/Gokapi/releases/latest/download/gokapi-linux_amd64.zip
-unzip gokapi.zip
-mv "$unzipf" /opt/gokapi/gokapi
-rm -f gokapi.zip
-chmod +x /opt/gokapi/gokapi
-
-port=$(inputport "Введите порт (1024-65535): ")
-
 if ! systemctl list-unit-files --type=service | grep -q gokapi.service; then
+    mkdir -p /opt/gokapi
+    wget -O gokapi.zip https://github.com/Forceu/Gokapi/releases/latest/download/gokapi-linux_amd64.zip
+    unzip gokapi.zip
+    mv "$unzipf" /opt/gokapi/gokapi
+    rm -f gokapi.zip
+    chmod +x /opt/gokapi/gokapi
+
+    port=$(inputport "Введите порт (1024-65535): ")
+
     cat > /etc/systemd/system/gokapi.service <<EOF
 [Unit]
 Description=Gokapi self-hosted file share
@@ -44,9 +44,8 @@ RestartSec=3
 [Install]
 WantedBy=multi-user.target
 EOF
-
     systemctl daemon-reload
     systemctl enable --now gokapi
+else
+    systemctl restart gokapi || systemctl start gokapi
 fi
-
-systemctl restart gokapi || systemctl start gokapi
