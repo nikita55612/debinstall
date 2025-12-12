@@ -55,8 +55,8 @@ nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 nnoremap <leader>q :quit<CR>
 nnoremap <leader>w :write<CR>
+nnoremap <leader>E :edit %:h<CR>
 nnoremap <leader>e :edit .<CR>
-nnoremap <leader>e :edit #<CR>
 nnoremap n nzzzv
 nnoremap N Nzzzv
 EOF
